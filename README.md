@@ -25,7 +25,8 @@ Este proyecto es un simulador interactivo que modela el funcionamiento de una pl
 - **Interfaz de Usuario:** ImGui integrada con SFML.
 - **Diseño Modular:** Arquitectura orientada a objetos para modelar componentes.
 
-## PLAN A FUTURO ES IMPLEMENTAR UNA VISUALIZACIÓN 3D CON UNA SIMULACIÓN DE FLUJOS MÁS REAL Y ESCALABLE EN ESPACIO Y TIEMPO.
+### Plan futuro:
+Implementar una visualización en 3D que permita representar de manera más realista los flujos dentro del sistema. Esa visualización estaría diseñada para ser escalable tanto en el espacio como en el tiempo, permitiendo simular sistemas más grandes y complejos con mayor precisión y detalle dinámico, en especial respecto a los tamaños de los tanques y su posición en el espacio u otras variables como el tamaño de las tuberías, etc.
 
 ## Cómo Ejecutarlo
 1. Asegúrate de tener las bibliotecas necesarias:
