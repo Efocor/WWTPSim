@@ -199,6 +199,9 @@ public:
     std::vector<sf::CircleShape> waterParticles;
     float particleSpawnTime = 0.0f;
 
+    //|........||Removal efficiencies for different water parameters
+    std::map<WaterParameter, float> removalEfficiencies;
+
     Component(const std::string& n, const std::string& desc, const sf::Vector2f& pos)
         : name(n), description(desc), position(pos) {
         shape.setSize(sf::Vector2f(width, height));
@@ -240,6 +243,14 @@ public:
         for (auto& particle : waterParticles) {
             window.draw(particle);
         }
+    }
+
+    void addRemovalEfficiency(WaterParameter param, float efficiency) {
+        removalEfficiencies[param] = efficiency;
+    }
+
+    void removeRemovalEfficiency(WaterParameter param) {
+        removalEfficiencies.erase(param);
     }
 };
 
@@ -1311,6 +1322,17 @@ int main() {
                         float value_in = comp->inletWater.getParameter(param.first);
                         float value_out = comp->outletWater.getParameter(param.first);
                         ImGui::Text("%s - Inlet: %.2f, Outlet: %.2f", parameterToString(param.first).c_str(), value_in, value_out);
+                    }
+                    ImGui::Separator();
+                    ImGui::Text("Removal Efficiencies:");
+                    for (auto& param : comp->outletWater.parameters) {
+                        float efficiency = comp->removalEfficiencies[param.first];
+                        if (ImGui::SliderFloat(("Efficiency " + parameterToString(param.first)).c_str(), &efficiency, -1.0f, 1.0f)) {
+                            comp->addRemovalEfficiency(param.first, efficiency);
+                        }
+                        if (ImGui::Button(("Remove " + parameterToString(param.first)).c_str())) {
+                            comp->removeRemovalEfficiency(param.first);
+                        }
                     }
                 }
             }
